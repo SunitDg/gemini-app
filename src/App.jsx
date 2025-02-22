@@ -4,44 +4,29 @@ import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css'
-import AppName from './components/AppName';
-import AddTodo from './components/AddTodo';
-import TodoItem from './components/TodoItem';
-import Container from './components/Container';
-import { TodoItemsCtx } from './store/todo-items-store';
-import Welcome  from './components/Welcome';
-import Counter from './components/Counter';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
+import CreatePost from './components/CreatePost';
+import Post from './components/Post';
+import PostList from './components/PostList';
+import PostListProvider from './store/post-list-store';
 
 function App() {
-  let context = useContext(TodoItemsCtx);
-  let [item, setItem] = useState([]);
-  function shareItem(itemName) {
-    setItem((oldItem) => {
-      return [...oldItem, itemName];
-    })
-  }
-  function deleteTodo(itemName) {
-    const list = item.filter((todo) => todo !== itemName);
-    setItem(list);
-  }
+  const [tab, setSelectedTab] = useState('Home');
 
-  return (
-    <Container>
-      <TodoItemsCtx.Provider value={
-        {
-          item: item,
-          addNewItem: shareItem,
-          deleteItem: deleteTodo
-      }}>
-        <Welcome></Welcome>
-        <AppName />
-        <AddTodo />
-        <TodoItem />
-        <Counter/>
-      </TodoItemsCtx.Provider>
+  return <PostListProvider>
+    <div className="app-container">
+      <Sidebar selectedTab={tab} onSelectTab={setSelectedTab} />
+      <div className="content">
+        <Header />
+        {tab === 'Home' ? <PostList /> : <CreatePost />}
+        <Footer />
+      </div>
 
-    </Container>
-  )
+    </div>
+
+  </PostListProvider>
 }
 
 export default App
