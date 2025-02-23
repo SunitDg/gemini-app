@@ -1,7 +1,10 @@
+import { Link, NavLink } from "react-router-dom";
+
 function Sidebar({selectedTab,onSelectTab}) {
     const handleOnClick = (menuItem) => {
         onSelectTab(menuItem);
     }
+    
     return <>
     <div className="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{width: '280px'}}>
     <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -11,16 +14,16 @@ function Sidebar({selectedTab,onSelectTab}) {
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
       <li onClick={() => handleOnClick('Home')}>
-        <a href="#" className={`${selectedTab === 'Home' ? 'active' : ''} nav-link link-dark`}>
+        <NavLink to="/" className={`nav-link link-dark`}>
           <svg className="bi me-2" width="16" height="16"><use xlinkHref="#speedometer2"></use></svg>
           <span >Post</span>
-        </a>
+        </NavLink>
       </li>
       <li onClick={() => handleOnClick('Post')}>
-        <a href="#" className={`${selectedTab === 'Post' ? 'active' : ''} nav-link link-dark`}>
+        <NavLink to="/create-post" className={`nav-link link-dark`}>
           <svg className="bi me-2" width="16" height="16"><use xlinkHref="#table"></use></svg>
           <span >Create Post</span>
-        </a>
+        </NavLink>
       </li>
     </ul>
     <hr/>

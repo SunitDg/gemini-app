@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { MdDelete } from "react-icons/md";
 import { PostList } from "../store/post-list-store";
+import { NavLink } from "react-router-dom";
 
 const Post = ({ post }) => {
 
@@ -16,6 +17,7 @@ const Post = ({ post }) => {
       {post.tags.map((tag) => <span key={tag} className="badge text-bg-primary" style={{ margin: '5px' }}>{tag}</span>)}
 
       {/* <a href="#" className="btn btn-primary">{post.reaction}</a> */}
+      <NavLink to={'/post-details/'+post.id}><button className="btn btn-primary">Get Post Details</button></NavLink>
     </div>
   </div>
 }

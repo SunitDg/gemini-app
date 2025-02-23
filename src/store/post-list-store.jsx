@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 export const PostList = createContext({
-  postList: [],
+  initialPostList: [],
   addPost: () => { },
   deletePost: () => { }
 });
@@ -15,24 +15,7 @@ const PostListProvider = ({ children }) => {
   const deletePost = (index) => {
     dispatchPostList({type: 'DELETE_POST', payload: index});
   }
-  let DEFAULT_POST_LIST = [
-    {
-      "id": "post1",
-      "title": "Post Title 1",
-      "body": "This is the body of the first post.",
-      "reaction": 1,
-      "userId": "user123",
-      "tags": ["vacation", "mumbai", "enjoying", "value"]
-    },
-    {
-      "id": "post2",
-      "title": "Post Title 2",
-      "body": "This is the body of the second post.",
-      "reaction": 2,
-      "userId": "user456",
-      "tags": ["vacation", "mumbai", "enjoying", "value"]
-    }
-  ];
+  let DEFAULT_POST_LIST = [];
 
   const postListReducer = (currPostList, action) => {
     if(action.type === 'DELETE_POST') {
